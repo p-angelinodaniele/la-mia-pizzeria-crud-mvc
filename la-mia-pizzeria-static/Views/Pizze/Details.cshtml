@@ -1,0 +1,23 @@
+﻿@Model Pizza
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-4 ">
+            <div class="card-group">
+                <div class="card gy-0 m-1">
+                    <img class="card-img-top" src="@Model.Image" alt="Card image cap" width="250" height="200">
+                    <div class="card-body bg-warning">
+                        <h5 class="card-title">@Model.Name</h5>
+                        <p class="card-text">@Model.Description</p>
+                    </div>
+                    <div class="card-footer">
+                        <h5 class="text-center">&euro; @Model.Prezzo</h5>
+                    </div>
+                </div>
+
+                
+                
+            </div> 
+        </div>
+    </div>
+</div>
