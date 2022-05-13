@@ -1,7 +1,7 @@
 ﻿@model List<Pizza>
 
 <div class="container">
-    <div class="row text-warning bg-white">
+    <div class="row text-warning bg-dark">
         <div class="col-12">
             <div class="text-center">
                 <h1 class="mt-3 mb-3">il Menù</h1>
@@ -11,28 +11,32 @@
 </div>
 
 
-            <a class="btn-primary btn-primary"
+            <a class="btn-primary btn-dark"
             href="@Url.Action("Create", "Pizze")">
-            Nuova Pizza
+            Aggiungi Pizza
             </a>
 
         
-<section class="bg-dark">
+
 
     
-        
+        @{
+            int count = 1;
+            bool check = false;
+           
+        }
     
-    <div class="card-group">
-            @foreach(Pizza postDellaPizza in Model)
-            {
+            <div class="card-group">
+                @foreach(Pizza postDellaPizza in Model){
+
+                    
+                    
                 
-            
                 
-                
-                    <div class="col-3">
+                    <div class="col-3">    
                         <div class="card gy-0 m-1">
                             <img class="card-img-top" src="@postDellaPizza.Image" alt="Card image cap" width="250" height="200">
-                            <div class="card-body bg-warning">
+                            <div class="card-body bg-warning" style= "height: 15rem;">
                                 <h5 class="card-title">@postDellaPizza.Name</h5>
                                 <p class="card-text">@postDellaPizza.Description</p>
                             </div>
@@ -52,9 +56,11 @@
                                 </form>
                             </div>  
                         </div>
-                    </div>
-                
-            } 
-    </div>
+                                
+                    </div>   
+
+                    
+                } 
+            </div>
     
-</section>
+
