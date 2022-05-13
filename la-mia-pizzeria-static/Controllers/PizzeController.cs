@@ -17,16 +17,7 @@ namespace la_mia_pizzeria_static.Controllers
         [HttpGet]
         public IActionResult Details(string name)
         {
-            Pizza pizzaFound = null;
-
-            foreach(Pizza pizze in PizzaData.GetPizze())
-            {
-                if(pizze.Name == name)
-                {
-                    pizzaFound = pizze;
-                    break;
-                }
-            }
+            Pizza pizzaFound = GetPizzaByName(name);
 
             if (pizzaFound != null)
             {
@@ -60,6 +51,88 @@ namespace la_mia_pizzeria_static.Controllers
 
         }
 
+
+        [HttpGet]
+        public IActionResult Update(string name)
+        {
+            Pizza pizzaToEdit = GetPizzaByName(name);
+            if(pizzaToEdit != null)
+            {
+                return View("Update", pizzaToEdit);
+            }
+            else
+            {
+                return NotFound("La pizza con il nome " + name + " non è stato trovato");
+            }
+
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Update(string name, Pizza model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Update", model);
+            }
+            Pizza pizzaOriginal = GetPizzaByName(name);
+            if(pizzaOriginal != null)
+            {
+                pizzaOriginal.Prezzo = model.Prezzo;
+                pizzaOriginal.Description = model.Description;
+                pizzaOriginal.Name = model.Name;
+                pizzaOriginal.Image = model.Image;
+
+                return RedirectToAction("Index");
+            } else
+            {
+                return NotFound();
+            }
+        }
+
+
+        [HttpPost]
+        public IActionResult Delete(string name)
+        {
+            string PizzaToRemove = null;
+            List<Pizza> pizzaList = PizzaData.GetPizze();
+            foreach (Pizza pizza in pizzaList)
+            {
+                if(pizza.Name == name)
+                {
+                    PizzaData.GetPizze().Remove(pizza);
+
+                    return RedirectToAction("Index");
+                }
+               
+            }
+            return NotFound();
+
+        }
+
+
+
+
+
+
+
+
+
+        private Pizza GetPizzaByName(string name)
+        {
+            Pizza pizzaFound = null;
+
+            foreach (Pizza pizze in PizzaData.GetPizze())
+            {
+                if (pizze.Name == name)
+                {
+                    pizzaFound = pizze;
+                    break;
+                }
+            }
+            return pizzaFound;
+        }
 
 
 
