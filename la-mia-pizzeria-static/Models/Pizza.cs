@@ -4,10 +4,12 @@ using System.ComponentModel.DataAnnotations;
 
 
 
+
 namespace la_mia_pizzeria_static.Models
 {
     public class Pizza
     {
+        [Key]
         [Required(ErrorMessage = "Il campo nome è obbligatorio")]
         [StringLength(20, ErrorMessage = "Il nome non può avere più di 20 caratteri")]
         public string Name { get; set; }
