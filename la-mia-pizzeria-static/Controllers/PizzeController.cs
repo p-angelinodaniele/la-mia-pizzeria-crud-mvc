@@ -14,7 +14,7 @@ namespace la_mia_pizzeria_static.Controllers
 
             using (PizzeriaContext db = new PizzeriaContext())
             {
-                pizze = db.Pizza.ToList<Pizza>();
+                pizze = db.Pizze.ToList<Pizza>();
             }
 
                 return View("HomePage", pizze);
@@ -27,7 +27,7 @@ namespace la_mia_pizzeria_static.Controllers
             {
                 try
                 {
-                    Pizza pizzaFound = db.Pizza
+                    Pizza pizzaFound = db.Pizze
                         .Where(pizza => pizza.Name == name)
                         .First();
                     return View("Details", pizzaFound);
@@ -63,7 +63,7 @@ namespace la_mia_pizzeria_static.Controllers
             {
                 Pizza pizzaToCreate = new Pizza(nuovaPizza.Name, nuovaPizza.Description, nuovaPizza.Image, nuovaPizza.Prezzo);
 
-                db.Pizza.Add(pizzaToCreate);
+                db.Pizze.Add(pizzaToCreate);
                 db.SaveChanges();
             }
 
@@ -79,7 +79,7 @@ namespace la_mia_pizzeria_static.Controllers
 
             using (PizzeriaContext db = new PizzeriaContext())
             {
-                pizzaToEdit = db.Pizza
+                pizzaToEdit = db.Pizze
                      .Where(post => post.Name == name)
                      .FirstOrDefault();
 
@@ -110,7 +110,7 @@ namespace la_mia_pizzeria_static.Controllers
 
             using (PizzeriaContext db = new PizzeriaContext())
             {
-                pizzaToEdit = db.Pizza
+                pizzaToEdit = db.Pizze
                      .Where(post => post.Name == name)
                      .FirstOrDefault();
 
@@ -139,13 +139,13 @@ namespace la_mia_pizzeria_static.Controllers
         {
             using (PizzeriaContext db = new PizzeriaContext())
             {
-                Pizza pizzaToDelete = db.Pizza
+                Pizza pizzaToDelete = db.Pizze
                      .Where(post => post.Name == name)
                      .FirstOrDefault();
 
                 if (pizzaToDelete != null)
                 {
-                    db.Pizza.Remove(pizzaToDelete);
+                    db.Pizze.Remove(pizzaToDelete);
                     db.SaveChanges();
 
                     return RedirectToAction("Index");
